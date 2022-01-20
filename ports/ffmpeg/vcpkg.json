@@ -154,7 +154,7 @@
           "features": [
             "dav1d"
           ],
-          "platform": "!(uwp | arm | x86 | osx)"
+          "platform": "!(uwp | osx)"
         },
         {
           "name": "ffmpeg",

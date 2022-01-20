@@ -1,4 +1,4 @@
-vcpkg_fail_port_install(ON_ARCH "arm" "x86" ON_TARGET "uwp")
+vcpkg_fail_port_install(ON_TARGET "uwp")
 
 vcpkg_from_gitlab(
     GITLAB_URL https://code.videolan.org
@@ -13,6 +13,16 @@ vcpkg_from_gitlab(
 vcpkg_find_acquire_program(NASM)
 get_filename_component(NASM_EXE_PATH ${NASM} DIRECTORY)
 vcpkg_add_to_path(${NASM_EXE_PATH})
+
+if (VCPKG_TARGET_ARCHITECTURE STREQUAL "arm" OR VCPKG_TARGET_ARCHITECTURE STREQUAL "arm64")
+    if(VCPKG_TARGET_IS_WINDOWS)
+        vcpkg_find_acquire_program(GASPREPROCESSOR)
+        foreach(GAS_PATH ${GASPREPROCESSOR})
+            get_filename_component(GAS_ITEM_PATH ${GAS_PATH} DIRECTORY)
+            set(ENV{PATH} "$ENV{PATH}${VCPKG_HOST_PATH_SEPARATOR}${GAS_ITEM_PATH}")
+        endforeach(GAS_PATH)
+    endif()
+endif()
 
 set(LIBRARY_TYPE ${VCPKG_LIBRARY_LINKAGE})
 if (LIBRARY_TYPE STREQUAL "dynamic")
