@@ -423,6 +423,12 @@ else()
     set(OPTIONS "${OPTIONS} --disable-libspeex")
 endif()
 
+if("srt" IN_LIST FEATURES)
+    set(OPTIONS "${OPTIONS} --enable-libsrt")
+else()
+    set(OPTIONS "${OPTIONS} --disable-libsrt")
+endif()
+
 if("ssh" IN_LIST FEATURES)
     set(OPTIONS "${OPTIONS} --enable-libssh")
 else()

@@ -525,6 +525,12 @@
         "speex"
       ]
     },
+    "srt": {
+      "description": "Secure Reliable Transport (SRT) Protocol via libsrt",
+      "dependencies": [
+        "libsrt"
+      ]
+    },
     "ssh": {
       "description": "SFTP protocol via libssh",
       "dependencies": [
