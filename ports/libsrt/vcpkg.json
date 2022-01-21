@@ -6,7 +6,7 @@
   "homepage": "https://github.com/Haivision/srt",
   "supports": "!uwp",
   "dependencies": [
-    "openssl",
+    "mbedtls",
     {
       "name": "vcpkg-cmake",
       "host": true

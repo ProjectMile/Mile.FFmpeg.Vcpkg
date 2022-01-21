@@ -29,7 +29,7 @@ vcpkg_cmake_configure(
         -DENABLE_SHARED=${BUILD_DYNAMIC}
         -DENABLE_STATIC=${BUILD_STATIC}
         -DENABLE_UNITTESTS=OFF
-        -DUSE_OPENSSL_PC=OFF
+        -DUSE_ENCLIB=mbedtls
 )
 
 vcpkg_cmake_install()
