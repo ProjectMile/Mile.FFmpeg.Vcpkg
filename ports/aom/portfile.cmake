@@ -20,9 +20,16 @@ vcpkg_from_git(
         aom-uninitialized-pointer.diff
 )
 
+if(VCPKG_TARGET_IS_WINDOWS)
+    if(VCPKG_TARGET_ARCHITECTURE STREQUAL "arm" OR VCPKG_TARGET_ARCHITECTURE STREQUAL "arm64")
+        set(OPTIONS ${OPTIONS} -DAOM_TARGET_CPU=generic)
+    endif()
+endif()
+
 vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
     OPTIONS
+        ${OPTIONS}
         -DENABLE_DOCS=OFF
         -DENABLE_EXAMPLES=OFF
         -DENABLE_TESTDATA=OFF

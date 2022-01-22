@@ -4,7 +4,6 @@
   "port-version": 2,
   "description": "AV1 codec library",
   "homepage": "https://aomedia.googlesource.com/aom",
-  "supports": "!(windows & arm & !uwp)",
   "dependencies": [
     {
       "name": "vcpkg-cmake",
