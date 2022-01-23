@@ -1,8 +1,8 @@
-set(ILBC_VERSION 3.0.3)
+set(ILBC_VERSION 3.0.4)
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/TimothyGu/libilbc/releases/download/v${ILBC_VERSION}/libilbc-${ILBC_VERSION}.zip"
     FILENAME "libilbc-${ILBC_VERSION}.zip"
-    SHA512 a5755db093529f6a3fd8fd47da63b57cffff1d3babef443d92f7c5a250ce8d1585adfba525c4037b142d9f00f1675a5054c172bf936be280dfcc22ed553c94c6
+    SHA512 b32561ddc001033f505d22b378c076eb46c6e4a1418a1c19c58ee4d1d16e033cd7943b2d9d9d09596292e172dc56fb00522c2be211816175ac41847ce382b0f7
 )
 
 vcpkg_extract_source_archive_ex(
