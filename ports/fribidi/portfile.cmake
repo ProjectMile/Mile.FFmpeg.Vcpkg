@@ -4,6 +4,8 @@ vcpkg_from_github(
     REF v1.0.11
     SHA512 9ddb0dbfb28ee4f1d9dd5d46fe1fff75c5446bfdacaabf8647847c36ef72eec823f6e6d6d1369d67c292d680004f7113c9e69114a8fae1d73ab11a58c66a8b8a
     HEAD_REF master
+    PATCHES
+        0001-bypass-gen-tab.patch
 )
 
 vcpkg_configure_make(
