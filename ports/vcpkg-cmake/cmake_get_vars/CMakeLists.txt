@@ -111,7 +111,7 @@ endif()
 if(CMAKE_CXX_COMPILER_TARGET)
     if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         string(APPEND EXTRA_FLAGS " \"${CMAKE_CXX_COMPILE_OPTIONS_TARGET}${CMAKE_CXX_COMPILER_TARGET}\"")
-    else()
+    elseif(CMAKE_CXX_COMPILE_OPTIONS_TARGET)
         string(APPEND EXTRA_FLAGS " ${CMAKE_CXX_COMPILE_OPTIONS_TARGET} \"${CMAKE_CXX_COMPILER_TARGET}\"")
     endif()
 endif()
@@ -143,10 +143,18 @@ foreach(incdir IN LISTS CMAKE_C_STANDARD_INCLUDE_DIRECTORIES)
 endforeach()
 
 foreach(flag CXX C SHARED_LINKER EXE_LINKER STATIC_LINKER RC)
-    if(MSVC)
-        # Transform MSVC /flags to -flags due to bash scripts intepreting /flag as a path.
-        # This is imperfect because it fails on directories with trailing spaces, but those are exceedingly rare
+    # When using MSVC, maybe transform /flags to -flags.
+    #   When cross compiling, "/flags" may be an absolute path starting with /, so don't transform.
+    #   Otherwise, transform to improve compatibility with scripts interpreting "/flags" as a path.
+    if(MSVC AND "${CMAKE_HOST_SYSTEM_NAME}" MATCHES "Windows")
+        # This implementation is imperfect because it fails on directories with trailing spaces,
+        # but those are rare.
         string(REGEX REPLACE "(^| )/" "\\1-" ${flag}_FLAGS "${${flag}_FLAGS}")
+        if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+            if("${flag}" STREQUAL "CXX")
+                string(APPEND ${flag}_FLAGS " -ZW:nostdlib")
+            endif()
+        endif()
     endif()
     string(REPLACE "\\" "\\\\" ${flag}_FLAGS "${${flag}_FLAGS}")
     string(REPLACE "\"" "\\\"" ${flag}_FLAGS "${${flag}_FLAGS}")
